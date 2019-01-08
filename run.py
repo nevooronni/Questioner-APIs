@@ -1,0 +1,3 @@
+"""app initializer"""
+
+import os
