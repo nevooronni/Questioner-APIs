@@ -1,7 +1,7 @@
 import unittest
 from app import create_app
 
-class BaseTest(unittest.TestCaase):
+class BaseTest(unittest.TestCase):
   """
     Base Test Class
   """
