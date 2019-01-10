@@ -20,10 +20,10 @@ class TestUser(BaseTest):
 
     res = self.client.post('/api/v1/signup')
     data = res.get_json()
-
+    print(res)
     self.assertEqual(res.status_code, 400)
     self.assertEqual(data['status'], 400)
-    self.assertEqual(data['error'], 'No data')
+    self.assertEqual(data['message'], 'No data provided')
 
   def test_signup_with_empty_data(self):
     """
@@ -36,8 +36,8 @@ class TestUser(BaseTest):
     data = res.get_json()
 
     self.assertEqual(res.status_code, 400)
-    self.assertEqual(data['status_code'], 400)
-    self.assertEqual(data['error'], 'Invalid data, please fill all the required fields')
+    self.assertEqual(data['status'], 400)
+    self.assertEqual(data['message'], 'No data provided')
 
   def test_signup_with_missing_fields(self):
     """
@@ -55,7 +55,7 @@ class TestUser(BaseTest):
 
     self.assertEqual(res.status_code, 400)
     self.assertEqual(data['status'], 400)
-    self.assertEqual(data['error'], 'Invalid data, please fill all required fields')
+    self.assertEqual(data['message'], 'Invalid data, please fill all required fields')
 
 
   def test_signup_with_invalid_email(self):
@@ -78,7 +78,7 @@ class TestUser(BaseTest):
 
     self.assertEqual(res.status_code, 400)
     self.assertEqual(data['status'], 400)
-    self.assertEqual(data['error'], 'Invalid data, please fill in all required fields')
+    self.assertEqual(data['message'], 'Invalid data, please fill all required fields')
 
   def test_signup_with_invalid_password(self):
     """ 
@@ -86,22 +86,22 @@ class TestUser(BaseTest):
     """
 
     user = {
-      'firstname': 'Neville',
-      'lastname': 'Oronni',
-      'othername': 'Gerald',
-      'username': 'nevooronni',
-      'email': 'nevooronni@gmail.com',
-      'password': 'afdafs',
-      'phoneNumber': '0799244265'  
+      "firstname": "Neville",
+      "lastname": "Oronni",
+      "othername": "Gerald",
+      "username": "nevooronni",
+      "email": "nevooronni@gmail.com",
+      "password": "afdafs",
+      "phoneNumber": "0799244265"
     }
 
-    res = self.client.post('/api/v1/signup/', json=user, headers={'Content-Type': 'application/json'})
+    res = self.client.post('/api/v1/signup', json=user, headers={'Content-Type': 'application/json'})
     data = res.get_json()
 
     self.assertEqual(res.status_code, 400)
     self.assertEqual(data['status'], 400)
-    self.assertEqual(data['error'], 'Invalid data, please fill all required fields')
-
+    self.assertEqual(data['message'], 'Invalid data, please fill all required fields')
+    
   def test_signup_with_valid_data(self):
     """
       Test signup with valid data
@@ -158,7 +158,7 @@ class TestUser(BaseTest):
 
     self.assertEqual(res_2.status_code, 409)
     self.assertEqual(data_2['status'], 409)
-    self.assertEqual(data_2['error'], 'Error email alreay exists')
+    self.assertEqual(data_2['message'], 'Error email already exists')
 
   def test_signup_with_existing_username(self):
     """
@@ -182,7 +182,7 @@ class TestUser(BaseTest):
     user_2 = {
       'firstname': 'Paul',
       'lastname': 'Davis',
-      'username': 'pd',
+      'username': 'willy',
       'email': 'william@gmail.com',
       'password': 'rbcF$214c',
       'phoneNumber': '0712344444'  
@@ -193,4 +193,4 @@ class TestUser(BaseTest):
 
     self.assertEqual(res_2.status_code, 409)
     self.assertEqual(data_2['status'], 409)
-    self.assertEqual(data_2['error'], 'Error username alreay exists')
+    self.assertEqual(data_2['message'], 'Error username already exists')

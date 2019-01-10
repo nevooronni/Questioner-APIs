@@ -1,4 +1,4 @@
-from datatime import datetime
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from ..utils.utils import generate_id
 
@@ -15,7 +15,7 @@ class User(object):
     """
 
     data['id'] = generate_id(users)
-    data['password'] = generate_password_hash['password']
+    data['password'] = generate_password_hash(data['password'])
     data['registered_on'] = datetime.now()
     data['modified_on'] = datetime.now()
     data['is_admin'] = False
@@ -38,7 +38,7 @@ class User(object):
     got_user = [user for user in users if user['username'] == username]
     return got_user[0]
 
-  def check_password(self, hash, password)"
+  def check_password(self, hash, password):
     """
       method to check if the passwords match
     """

@@ -12,11 +12,11 @@ class UserSchema(Schema):
   lastname = fields.Str(required=True, validate=(required))
   othername = fields.Str(required=False)
   username = fields.Str(required=True, validate=(required))
-  phone_number = fields.Str(required=True, validate=(required))
+  phoneNumber = fields.Str(required=True, validate=(required))
   email = fields.Email(required=True, validate=(email))
   password = fields.Str(required=True, validate=(password))
-  registered_on = fields.Datetime(dump_only=True)
-  modified_on = fields.Datetime(dump_only=True)
+  registered_on = fields.DateTime(dump_only=True)
+  modified_on = fields.DateTime(dump_only=True)
   is_admin = fields.Bool(dump_only=True)
 
 

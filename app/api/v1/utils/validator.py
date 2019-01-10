@@ -9,8 +9,8 @@ def required(value):
   if isinstance(value, str):
     if not value.strip(' '):
       raise ValidationError('This parameter cannot be null')
-    return Value
-  else value:
+    return value
+  elif value:
     return value
 
 def email(value):
@@ -40,7 +40,7 @@ def password(password):
       error = True
       break
     elif not re.search("[0-9]", password):
-      errort True
+      error = True
       break
     elif not re.search("[_@$#&^%]", password):
       error = True
