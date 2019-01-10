@@ -3,7 +3,7 @@
 ## Badges
 -------------------------
 
-[![Build Status](https://travis-ci.org/nevooronni/Questioner-APIs.svg?branch=develop)](https://travis-ci.org/nevooronni/Questioner-APIs) [![Coverage Status](https://coveralls.io/repos/github/nevooronni/Questioner-APIs/badge.svg?branch=develop)](https://coveralls.io/github/nevooronni/Questioner-APIs?branch=develop) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
+[![Build Status](https://travis-ci.org/nevooronni/Questioner-APIs.svg?branch=develop)](https://travis-ci.org/nevooronni/Questioner-APIs) [![Coverage Status](https://coveralls.io/repos/github/nevooronni/Questioner-APIs/badge.svg?branch=develop)](https://coveralls.io/github/nevooronni/Questioner-APIs?branch=develop) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![PEP8](https://img.shields.io/badge/code%20style-pep8A-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 
 
 ## Summary 
