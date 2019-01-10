@@ -20,9 +20,8 @@ def create_app(config_name):
   @jwt.token_in_blacklist_loader
   def check_blacklisted(token):
     from app.api.v1.models.token_model import RevokedTokenModel
-    jt1 = token['jt1']
-    return RevokedTokenModel().is_blacklisted(jt1)
-
+    jti = token['jti']
+    return RevokedTokenModel().is_blacklisted(jti)
   #register blueprint
   app.register_blueprint(users_bluerprint)
   return app
