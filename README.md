@@ -28,8 +28,6 @@ Pre-requisites
 - Postman
 - Git
 - Python3
-- Flask
-- Flask restplus
 
 Testing
 -------------------------- 
@@ -69,9 +67,21 @@ Installation
     ```
       pip install -r requirements.txt
     ```
-Authors
--------------------------
-python3 run.py
+6. Set environment variables
+    ```
+      mv .env.run .env 
+
+      source .env   
+    ```
+
+7. Run app  
+    ```
+      flask run
+    ```
+8. Run tests
+    ```
+      py.test --cov=app --cov-config .coveragerc
+    ```
 
 Use Postman to test following working Endpoinsts
 -------------------------
@@ -85,8 +95,6 @@ POST /questions | Create a question for a specific meetup
 PATCH /questions/&lt;question-id&gt;/upvote | Upvote (increases votes by 1) a specific question
 PATCH /questions/&lt;question-id&gt;/downvote | Downvote (decrease votes by 1) a specific question
 POST /meetups/&lt;meetup-id&gt;/rsvps | Respond to meetup RSVP
-
-
 
 Authors
 -------------------------
