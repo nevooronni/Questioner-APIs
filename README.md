@@ -3,7 +3,7 @@
 ## Badges
 -------------------------
 
-[![Build Status](https://travis-ci.org/nevooronni/Questioner-APIs.svg?branch=master)](https://travis-ci.org/nevooronni/Questioner-APIs) [![Coverage Status](https://coveralls.io/repos/github/nevooronni/Questioner-APIs/badge.svg?branch=master)](https://coveralls.io/github/nevooronni/Questioner-APIs?branch=master) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
+[![Build Status](https://travis-ci.org/nevooronni/Questioner-APIs.svg?branch=develop)](https://travis-ci.org/nevooronni/Questioner-APIs) [![Coverage Status](https://coveralls.io/repos/github/nevooronni/Questioner-APIs/badge.svg?branch=master)](https://coveralls.io/github/nevooronni/Questioner-APIs?branch=develop) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 
 
 ## Summary 
@@ -28,8 +28,6 @@ Pre-requisites
 - Postman
 - Git
 - Python3
-- Flask
-- Flask restplus
 
 Testing
 -------------------------- 
@@ -69,9 +67,21 @@ Installation
     ```
       pip install -r requirements.txt
     ```
-Authors
--------------------------
-python3 run.py
+6. Set environment variables
+    ```
+      mv .env.run .env 
+
+      source .env   
+    ```
+
+7. Run app  
+    ```
+      flask run
+    ```
+8. Run tests
+    ```
+      py.test --cov=app --cov-config .coveragerc
+    ```
 
 Use Postman to test following working Endpoinsts
 -------------------------
@@ -85,8 +95,6 @@ POST /questions | Create a question for a specific meetup
 PATCH /questions/&lt;question-id&gt;/upvote | Upvote (increases votes by 1) a specific question
 PATCH /questions/&lt;question-id&gt;/downvote | Downvote (decrease votes by 1) a specific question
 POST /meetups/&lt;meetup-id&gt;/rsvps | Respond to meetup RSVP
-
-
 
 Authors
 -------------------------
