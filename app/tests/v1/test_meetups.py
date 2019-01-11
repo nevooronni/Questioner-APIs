@@ -19,7 +19,7 @@ class TestMeetups(BaseTest):
       'topic': 'Marvel Avengers Meetup',
       'location': 'Time Towers, Nairobi',
       'happening_on': '14/01/2019',
-      'tags': ['python', 'flask']
+      'tags': ['comics', 'marvel universe']
     }
 
     self.meetup_with_no_location = {
