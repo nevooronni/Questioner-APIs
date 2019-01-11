@@ -31,7 +31,7 @@ class User(object):
     got_user = [user for user in users if value == user[key]]
     return len(got_user) > 0
 
-  def find_user_by_username(self, username):
+  def find_user_by_username(self, key, username):
     """
       method to find a user by username
     """
