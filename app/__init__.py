@@ -4,7 +4,8 @@ import os
 from flask import Flask 
 from instance.config import app_config
 from flask_jwt_extended import (JWTManager)
-from app.api.v1.views.user_view import v1 as users_bluerprint
+from app.api.v1.views.user_view import v1 as users_blueprint
+from app.api.v1.views.meetup_view import v1 as meetups_blueprint
 
 def create_app(config_name):
   """
@@ -22,6 +23,9 @@ def create_app(config_name):
     from app.api.v1.models.token_model import RevokedTokenModel
     jti = token['jti']
     return RevokedTokenModel().is_blacklisted(jti)
+
   #register blueprint
-  app.register_blueprint(users_bluerprint)
+  app.register_blueprint(users_blueprint)
+  app.register_blueprint(meetups_blueprint)
+
   return app
