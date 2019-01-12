@@ -22,7 +22,7 @@ class TestMeetups(BaseTest):
       'tags': ['comics', 'marvel universe']
     }
 
-    self.meetup2 = {
+    self.meetup_2 = {
       'topic' : 'Nairobi Data Science Meetup',
       'location' : 'Jakaranda Hotel, Nairobi',
       'happening_on' : '08/01/2019',
