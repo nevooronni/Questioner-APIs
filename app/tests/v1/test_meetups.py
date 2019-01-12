@@ -22,6 +22,13 @@ class TestMeetups(BaseTest):
       'tags': ['comics', 'marvel universe']
     }
 
+    self.meetup_2 = {
+      'topic' : 'Nairobi Data Science Meetup',
+      'location' : 'Jakaranda Hotel, Nairobi',
+      'happening_on' : '08/01/2019',
+      'tags' : ['python', 'R program', 'data science']
+    }
+
     self.meetup_with_no_location = {
       'topic': 'Marvel Avengers Meetup',
       'happening_on': '14/01/2019',
@@ -102,4 +109,29 @@ class TestMeetups(BaseTest):
     self.assertEqual(data['status'], 201)
     self.assertEqual(data['message'], 'meetup created succesfully')
 
+  def test_fetch_specific_meetup(self):
+    """
+      Test method for fetching a specific meetup
+    """
+
+    self.client.post('/api/v1/meetups', json=self.meetup, headers=self.headers)
+    self.client.post('/api/v1/meetups', json=self.meetup_2, headers=self.headers)
+
+    res = self.client.get('/api/v1/meetups/1')
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 200)
+    self.assertEqual(data['status'], 200)
+    self.assertEqual(data['data']['id'], 1)
+
+  def test_fetch_non_existent_meetup(self):
+    """
+      Test method for fetching a meetup that doesn't exist
+    """
+    res = self.client.get('/api/v1/meetups/14')
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 404)
+    self.assertEqual(data['status'], 404)
+    self.assertEqual(data['message'], 'meetup not found')
   

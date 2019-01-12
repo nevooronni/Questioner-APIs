@@ -29,5 +29,19 @@ def create_meetup():
     'data':[response]
   }), 201
 
+@v1.route('/meetups/<int:meetup_id>', methods=['GET'])
+def fetch_meetup(meetup_id):
+  """ 
+    Endpoint for fetching a specific meetup
+  """
+
+  if not db.check_if_it_exists('id', meetup_id):
+    abort(make_response(jsonify({'status': 404, 'message': 'meetup not found'}), 404))
+  
+  meetup = db.find('id', meetup_id)
+  response = MeetupSchema().dump(meetup).data
+  return jsonify({'status': 200, 'data': response}), 200
+
+
 
   
