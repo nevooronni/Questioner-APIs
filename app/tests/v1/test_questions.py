@@ -41,7 +41,7 @@ class TestQuestions(BaseTest):
     self.assertEqual(res.status_code, 400)
     self.assertEqual(data['status'], 400)
     self.assertEqual(data['message'], 'No data provided')
-    
+
   def test_create_question_with_empty_data(self):
     """
       Test method for creating a question with empty data
@@ -77,3 +77,14 @@ class TestQuestions(BaseTest):
     self.assertEqual(res.status_code, 201)
     self.assertEqual(data['status'], 201)
     self.assertEqual(data['message'], 'question created succesfully')
+  
+  def test_upvote_on_question_not_posted(self):
+    """
+      Test upvote/downvote method on a question that doesn't exist
+    """
+    res = self.client.patch('/api/v1/questions/15/upvote')
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 404)stion created succesfully')
+    self.assertEqual(data['status'], 404)
+    self.assertEqual(data['message'], 'question not found')
