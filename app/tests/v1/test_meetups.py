@@ -18,27 +18,27 @@ class TestMeetups(BaseTest):
     self.meetup = {
       'topic': 'Marvel Avengers Meetup',
       'location': 'Time Towers, Nairobi',
-      'happening_on': '14/01/2019',
+      'happeningOn': '14/01/2019',
       'tags': ['comics', 'marvel universe']
     }
 
     self.meetup_2 = {
       'topic' : 'Nairobi Data Science Meetup',
       'location' : 'Jakaranda Hotel, Nairobi',
-      'happening_on' : '08/01/2019',
+      'happeningOn' : '08/01/2019',
       'tags' : ['python', 'R program', 'data science']
     }
 
     self.meetup_with_no_location = {
       'topic': 'Marvel Avengers Meetup',
-      'happening_on': '14/01/2019',
+      'happeningOn': '14/01/2019',
       'tags': ['python', 'flask']
     }
 
     self.meetup_with_empty_location = {
       'topic': 'Marvel Avengers Meetup',
       'location': '',
-      'happening_on': '14/01/2019',
+      'happeningOn': '14/01/2019',
       'tags': ['python', 'flask']  
     }
 
@@ -135,3 +135,16 @@ class TestMeetups(BaseTest):
     self.assertEqual(data['status'], 404)
     self.assertEqual(data['message'], 'meetup not found')
   
+  def test_fetch_all_upcoming_meetups(self):
+    """ 
+      Test method for fetching all upcoming meetups
+    """
+    self.client.post('/api/v1/meetups', json=self.meetup, headers=self.headers)
+    self.client.post('/api/v1/meetups', json=self.meetup_2, headers=self.headers)
+
+    res = self.client.get('/api/v1/meetups/upcoming')
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 200)
+    self.assertEqual(data['status'], 200)
+    self.assertEqual(len(data['data']), 2)

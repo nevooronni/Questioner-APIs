@@ -41,6 +41,19 @@ class Model(object):
     """
     return self.collection
 
+  # def fetch_all_upcoming(self):
+  #   """
+  #     method to fetch all upcoming item objects
+  #   """
+  #   upcoming = []
+  #   time = datetime.now()
+
+  #   data = self.collection[0]
+  #   for item in data:
+  #     if item['happeningOn'] > time:
+  #       result = upcoming.append(item) 
+  #   return result
+
   def delete(self, id):
     """
       method to delete item object
