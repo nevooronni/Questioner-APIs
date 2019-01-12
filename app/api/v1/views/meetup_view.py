@@ -42,6 +42,16 @@ def fetch_meetup(meetup_id):
   response = MeetupSchema().dump(meetup).data
   return jsonify({'status': 200, 'data': response}), 200
 
+@v1.route('/meetups/upcoming', methods=['GET'])
+def fetch_all_upcoming_meetups():
+  """
+    Endpoing for fetching all upcoming meetups
+  """
+
+  meetups = db.fetch_all()
+  response = MeetupSchema(many=True).dump(meetups).data
+  return jsonify({'status': 200, 'data': response}), 200
+
 
 
   
