@@ -1,13 +1,17 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from ..utils.utils import generate_id
+from .base_model import Model
 
 users = []
 
-class User(object):
+class User(Model):
   """
     Model class for user object
   """
+
+  def __init__(self):
+    super().__init__(users)
 
   def save(self, data):
     """
@@ -23,21 +27,7 @@ class User(object):
     users.append(data)
     return data
 
-  def user_exists(self, key, value):
-    """
-     method to check if a user exists
-    """
-
-    got_user = [user for user in users if value == user[key]]
-    return len(got_user) > 0
-
-  def find_user_by_username(self, key, username):
-    """
-      method to find a user by username
-    """
-    got_user = [user for user in users if user['username'] == username]
-    return got_user[0]
-
+  @staticmethod
   def check_password(self, hash, password):
     """
       method to check if the passwords match
