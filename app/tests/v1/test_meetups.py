@@ -148,3 +148,73 @@ class TestMeetups(BaseTest):
     self.assertEqual(res.status_code, 200)
     self.assertEqual(data['status'], 200)
     self.assertEqual(len(data['data']), 2)
+
+  def test_rsvp_with_yes(self):
+    """
+      Test method for rsvp with a yes status
+    """
+
+    self.client.post('/api/v1/meetups', json=self.meetup, headers=self.headers)
+
+    res = self.client.post('/api/v1/meetups/1/yes', headers=self.headers)
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 200)
+    self.assertEqual(data['status'], 200)
+    self.assertEqual(data['message'], 'rsvp created succesfully')
+    self.assertEqual(data['data']['status'], 'yes')
+
+  def test_rsvp_with_maybe(self):
+    """
+      Test method for rsvp with a maybe
+    """
+    self.client.post('/api/v1/meetups', json=self.meetup, headers=self.headers)
+
+    res = self.client.post('/api/v1/meetups/maybe', json=self.meetup, headers=self.headers)
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 200)
+    self.assertEqual(data['status'], 200)
+    self.assertEqual(data['message'], 'rsvp created succesfully')
+    self.assertEqual(data['data']['status'], 'maybe')
+
+  def test_rsvp_with_no(self):
+    """
+      Test method for rsvp with a no
+    """
+
+    self.client.post('/api/v1/meetups', json=self.meetup, header=self.headers)
+
+    res = self.client.post('api/v1/meetups/1/no', headers=self.headers)
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 200)
+    self.assertEqual(data['status'], 200)
+    self.assertEqual(data['message'], 'rsvp created successfully')
+    self.assertEqual(data['data']['status'], 'no')
+
+  def test_rsvp_with_non_existent_rsvp(self):
+    """
+      Test method for rsvp with a non existent rsvp
+    """
+
+    self.client.post('/api/v1/meetups', json=self.meetup, headers=self.headers)
+
+    res = self.client.post('/api/v1/meetup/1/comming', headers=self.headers)
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 400)
+    self.assertEqual(data['status'], 400)
+    self.assertEqual(data['message'], 'Error invalid rsvp!')
+
+  def test_rsvp_with_non_existent_meetup(self):
+    """
+      Test method for rsvp for meetup that does not exist
+    """
+
+    res = self.client.post('/api/v1/meetups/5/yes', headers=self.headers)
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 404)
+    self.assertEqual(data['status'], 404)
+    self.assertEqual(data['message'], 'Error meetup not found!')
