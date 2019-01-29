@@ -52,6 +52,32 @@ def fetch_all_upcoming_meetups():
   response = MeetupSchema(many=True).dump(meetups).data
   return jsonify({'status': 200, 'data': response}), 200
 
+@v1.route('/meetups/<int:meetup_id>/<string:rsvps>', methods=['POST'])
+def rsvps_meetup(meetup_id, rsvps):
+  """
+    Enpoint for rsvps a meetup
+  """
+
+  valid_reponses = ('yes', 'maybe', 'no')
+
+  if not db.check_if_it_exists('id', meetup_id):
+    return jsonify({'status': 404, 'message': 'Error meetup not found!'}), 404
+
+  if rsvps not in valid_reponses:
+    return jsonify({'status': 400, 'message': 'Error invalid rsvp!'}), 400
+
+  meetup = db.fetch_meetup_by_id(meetup_id)
+  return jsonify({
+    'status': 200,
+    'message': 'rsvp created successfully',
+    'data': {
+      'meetup': meetup['id'],
+      'topic': meetup['topic'],
+      'status': rsvps
+    }
+  }), 200
+
+
 
 
   

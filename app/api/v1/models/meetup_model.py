@@ -19,3 +19,12 @@ class Meetup(Model):
 
     data['id'] = generate_id(self.collection)
     return super().save(data)
+
+  def fetch_meetup_by_id(self, id):
+    """
+      method for fetching a meetup by id
+    """
+
+    meetups_fetched = [meetup for meetup in meetups if meetup['id'] == id]
+
+    return meetups_fetched[0]
