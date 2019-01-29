@@ -90,7 +90,7 @@ class TestQuestions(BaseTest):
     self.assertEqual(res.status_code, 200)
     self.assertEqual(data['status'], 200)
     self.assertEqual(data['message'], 'upvote successfull')
-    self.assertEqual(data['data']['votes'], 1)
+    self.assertEqual(data['data'][0]['votes'], 1)
 
   def test_upvote_with_non_existent_question(self):
     """

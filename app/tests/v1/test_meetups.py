@@ -122,7 +122,7 @@ class TestMeetups(BaseTest):
 
     self.assertEqual(res.status_code, 200)
     self.assertEqual(data['status'], 200)
-    self.assertEqual(data['data']['id'], 1)
+    self.assertEqual(data['data'][0]['id'], 1)
 
   def test_fetch_non_existent_meetup(self):
     """
@@ -162,7 +162,7 @@ class TestMeetups(BaseTest):
     self.assertEqual(res.status_code, 200)
     self.assertEqual(data['status'], 200)
     self.assertEqual(data['message'], 'rsvp created successfully')
-    self.assertEqual(data['data']['status'], 'yes')
+    self.assertEqual(data['data'][0]['status'], 'yes')
 
   def test_rsvps_with_maybe(self):
     """
@@ -176,7 +176,7 @@ class TestMeetups(BaseTest):
     self.assertEqual(res.status_code, 200)
     self.assertEqual(data['status'], 200)
     self.assertEqual(data['message'], 'rsvp created successfully')
-    self.assertEqual(data['data']['status'], 'maybe')
+    self.assertEqual(data['data'][0]['status'], 'maybe')
 
   def test_rsvps_with_no(self):
     """
@@ -191,7 +191,7 @@ class TestMeetups(BaseTest):
     self.assertEqual(res.status_code, 200)
     self.assertEqual(data['status'], 200)
     self.assertEqual(data['message'], 'rsvp created successfully')
-    self.assertEqual(data['data']['status'], 'no')
+    self.assertEqual(data['data'][0]['status'], 'no')
 
   def test_rsvps_with_non_existent_rsvp(self):
     """
