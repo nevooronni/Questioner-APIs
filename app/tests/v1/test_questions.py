@@ -77,3 +77,32 @@ class TestQuestions(BaseTest):
     self.assertEqual(res.status_code, 201)
     self.assertEqual(data['status'], 201)
     self.assertEqual(data['message'], 'question created succesfully')
+
+  def test_upvote_question(self):
+    """
+      Test method for upvoting a question
+    """
+
+    self.client.post('/api/v1/questions', json=self.question_with_valid_data, headers=self.headers)
+
+    res = self.client.post('/api/v1/questions/3/upvote', headers=self.headers)
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 200)
+    self.assertEqual(data['status'], 200)
+    self.assertEqual(data['message'], 'upvoted successfully')
+    self.assertEqual(data['data']['votes'], 1)
+
+  def test_upvote_with_non_existent_question(self):
+    """
+      Test method for upvoting a questioni that does not exist
+    """
+
+    res = self.client.post('/api/v1/questions/2/upvote', headers=self.headers)
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 404)
+    self.assertEqual(data['status'], 404)
+    self.assertEqual(data['message'], 'Error question you want to upvote not found!')
+
+  
