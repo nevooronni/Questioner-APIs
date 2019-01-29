@@ -104,4 +104,30 @@ class TestQuestions(BaseTest):
     self.assertEqual(data['status'], 404)
     self.assertEqual(data['message'], 'Error question you want to upvote not found!')
 
-  
+  def test_downvote_question(self):
+    """
+      Test method for downovting a question
+    """
+
+    self.client.post('/api/v1/questions', json=self.question_with_valid_data, headers=self.headers)
+
+    res = self.client.patch('/api/v1/questions/1/downvote', headers=self.headers)
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 200)
+    self.assertEqual(data['status'], 200)
+    self.assertEqual(data['message'], 'downvote successfull')
+    self.assertEqual(data['data'][0]['votes'], -1)
+
+  def test_downvote_question_with_non_existent_question(self):
+    """
+      Endpoint for downvoting a question with non existent question
+    """
+
+    res = self.client.patch('/api/v1/questions/2/downvote', headers=self.headers)
+    data = res.get_json()
+
+    self.assertEqual(res.status_code, 404)
+    self.assertEqual(data['status'], 404)
+    self.assertEqual(data['message'], 'Error question you want to downvote not found!')
+
