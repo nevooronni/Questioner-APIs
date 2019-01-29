@@ -38,4 +38,15 @@ class Question(Model):
 
         return question
 
+    def downvote_question(self, question_id):
+      """
+        method to downvote a question
+      """
+
+      for question in questions:
+        if question['id'] == question_id:
+          question['votes'] = question['votes']-1
+        
+        return question
+
     

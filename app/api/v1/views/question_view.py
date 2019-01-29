@@ -39,3 +39,19 @@ def upvote_question(question_id):
   data = []
   data.append(QuestionSchema().dump(question).data)
   return jsonify({'status': 200, 'message': 'upvote successfull', 'data': data}), 200
+
+@v1.route('/questions/<int:question_id>/downvote', methods=['PATCH'])
+def downvote_question(question_id):
+  """
+    method to downvote a question
+  """
+
+  if not db.check_if_it_exists('id', question_id):
+    return jsonify({'status': 404, 'message': 'Error question you want to downvote not found!'}), 404
+
+  question = db.downvote_question(question_id)
+  data = []
+  data.append(QuestionSchema().dump(question).data)
+  return jsonify({'status': 200, 'message': 'downvote successfull', 'data': data}), 200
+
+
