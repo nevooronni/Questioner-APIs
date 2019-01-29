@@ -82,15 +82,14 @@ class TestQuestions(BaseTest):
     """
       Test method for upvoting a question
     """
-
     self.client.post('/api/v1/questions', json=self.question_with_valid_data, headers=self.headers)
 
-    res = self.client.post('/api/v1/questions/3/upvote', headers=self.headers)
+    res = self.client.patch('/api/v1/questions/1/upvote', headers=self.headers)
     data = res.get_json()
 
     self.assertEqual(res.status_code, 200)
     self.assertEqual(data['status'], 200)
-    self.assertEqual(data['message'], 'upvoted successfully')
+    self.assertEqual(data['message'], 'upvote successfull')
     self.assertEqual(data['data']['votes'], 1)
 
   def test_upvote_with_non_existent_question(self):
@@ -98,7 +97,7 @@ class TestQuestions(BaseTest):
       Test method for upvoting a questioni that does not exist
     """
 
-    res = self.client.post('/api/v1/questions/2/upvote', headers=self.headers)
+    res = self.client.patch('/api/v1/questions/2/upvote', headers=self.headers)
     data = res.get_json()
 
     self.assertEqual(res.status_code, 404)

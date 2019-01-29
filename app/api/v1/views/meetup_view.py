@@ -39,8 +39,9 @@ def fetch_meetup(meetup_id):
     abort(make_response(jsonify({'status': 404, 'message': 'meetup not found'}), 404))
   
   meetup = db.find('id', meetup_id)
-  response = MeetupSchema().dump(meetup).data
-  return jsonify({'status': 200, 'data': response}), 200
+  data = []
+  data.append(MeetupSchema().dump(meetup).data)
+  return jsonify({'status': 200, 'data': data}), 200
 
 @v1.route('/meetups/upcoming', methods=['GET'])
 def fetch_all_upcoming_meetups():
@@ -70,11 +71,11 @@ def rsvps_meetup(meetup_id, rsvps):
   return jsonify({
     'status': 200,
     'message': 'rsvp created successfully',
-    'data': {
+    'data': [{
       'meetup': meetup['id'],
       'topic': meetup['topic'],
       'status': rsvps
-    }
+    }]
   }), 200
 
 

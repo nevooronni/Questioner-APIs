@@ -22,5 +22,20 @@ def create_question():
     abort(make_response(jsonify({'status': 400, 'message': 'Invalid data, please fill all required fields', 'errors': 'errors'}), 400))
   
   question = db.save(data)
-  response = QuestionSchema().dump(question).data
-  return jsonify({'status': 201, 'message': 'question created succesfully', 'data': response}), 201
+  data = []
+  data.append(QuestionSchema().dump(question).data)
+  return jsonify({'status': 201, 'message': 'question created succesfully', 'data': data}), 201
+
+@v1.route('/questions/<int:question_id>/upvote', methods=['PATCH'])
+def upvote_question(question_id):
+  """
+    method to upvote a question
+  """
+
+  if not db.check_if_it_exists('id', question_id):
+    return jsonify({'status': 404, 'message': 'Error question you want to upvote not found!'}), 404
+
+  question = db.upvote_question(question_id)
+  data = []
+  data.append(QuestionSchema().dump(question).data)
+  return jsonify({'status': 200, 'message': 'upvote successfull', 'data': data}), 200
